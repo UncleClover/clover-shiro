@@ -1,0 +1,88 @@
+import org.gradle.plugins.ide.eclipse.model.Facet
+
+apply plugin: "java"
+apply plugin: "war"
+apply plugin: "eclipse-wtp"
+
+sourceCompatibility = 1.7 // 设置 JDK 版本
+webAppDirName = "WebRoot" // 设置 WebApp 根目录
+sourceSets.main.java.srcDir "src" // 设置 Java 源码所在目录
+
+// 设置 maven 库地址
+repositories {
+	// 默认maven中心库
+	mavenCentral()
+
+    // 公司内网私服-公共仓库
+    // maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
+    
+    // 个人私服
+    maven { url "http://127.0.0.1:8082/nexus/content/groups/public/"} 
+}
+
+sourceSets{
+	main{
+		java{srcDirs = ["src/main/java"]}
+		resources{srcDirs = ["src/main/resources"]}
+	}
+	test{
+		java{srcDirs=['src/main/test']}
+        resources{srcDirs=['src/main/resources']}
+    }
+}
+// 设置依赖
+dependencies {
+    compile 'tomcat:servlet-api:7.0.79'
+    compile 'tomcat:jsp-api:7.0.79'
+    compile "javax.servlet:jstl:1.2"
+	compile "org.springframework:spring-aop:4.3.6.RELEASE"
+	compile "org.springframework:spring-beans:4.3.6.RELEASE"
+	compile "org.springframework:spring-context:4.3.6.RELEASE"
+	compile "org.springframework:spring-context-support:4.3.6.RELEASE"
+	compile "org.springframework:spring-core:4.3.6.RELEASE"
+	compile "org.springframework:spring-expression:4.3.6.RELEASE"
+	compile "org.springframework:spring-jdbc:4.3.6.RELEASE"
+	compile "org.springframework:spring-jms:4.3.6.RELEASE"
+	compile "org.springframework:spring-web:4.3.6.RELEASE"
+	compile "org.springframework:spring-webmvc:4.3.6.RELEASE"
+	compile "springside3:springside3-core:3.2.0"
+	compile "org.apache.logging.log4j:log4j-web:2.4"
+	compile "org.slf4j:slf4j-api:1.7.25"
+	compile "org.slf4j:slf4j-log4j12:1.7.25"
+	compile "mysql:mysql-connector-java:5.1.26"
+	compile "opensymphony:oscache:2.4.1"
+	compile "ojdbc:ojdbc:14"
+	compile "com.oracle:ojdbc14:10.2.0.4.0"
+	compile "com.mchange:c3p0:0.9.5.2"
+	compile "net.sf.json-lib:json-lib:2.4"
+	compile "com.googlecode.json-simple:json-simple:1.1.1"
+	compile "com.fasterxml.jackson.core:jackson-core:2.8.9"
+	compile "com.fasterxml.jackson.core:jackson-databind:2.8.9"
+	compile "com.alibaba:fastjson:1.2.37"
+	compile "org.aspectj:aspectjrt:1.8.13"
+	compile "org.aspectj:aspectjweaver:1.8.13"
+	compile "aopalliance:aopalliance:1.0"
+	compile "org.apache.shiro:shiro-core:1.2.2"
+	
+	
+	
+	testCompile(
+            "org.springframework:spring-test:4.1.7.RELEASE",
+            "junit:junit:4.12"
+    )
+
+}
+
+// 设置 Project Facets
+eclipse {
+    wtp {
+        facet {
+            facet name: "jst.web", type: Facet.FacetType.fixed
+            facet name: "wst.jsdt.web", type: Facet.FacetType.fixed
+            facet name: "jst.java", type: Facet.FacetType.fixed
+            facet name: "jst.web", version: "3.0"
+            facet name: "jst.java", version: "1.7"
+            facet name: "wst.jsdt.web", version: "1.0"
+        }
+    }
+}
