@@ -1,7 +1,6 @@
 package com.clover.shiro.realm;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -28,6 +27,8 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// 通过用户名从数据库获取权限字符串
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		
+		// 角色和权限通过数据库或者其他配置文件读取
 		// 权限
 		Set<String> s = new HashSet<String>();
 		s.add("look:desk");
@@ -47,6 +48,8 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String userName = (String) token.getPrincipal();
+		
+		// 用户密码通过数据库读取
 		String pwd = "123456";
 		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userName, pwd, this.getName());
 		return simpleAuthenticationInfo;
