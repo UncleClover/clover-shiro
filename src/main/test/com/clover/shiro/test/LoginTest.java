@@ -38,7 +38,7 @@ public class LoginTest {
 
 		// 当前我们的用户是匿名的用户，我们尝试进行登录，
 		if (!subject.isAuthenticated()) {
-			UsernamePasswordToken token = new UsernamePasswordToken("aihe", "aihe");
+			UsernamePasswordToken token = new UsernamePasswordToken("aihe", "123456");
 
 			// this is all you have to do to support 'remember me' (no config -
 			// built in!):
