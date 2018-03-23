@@ -12,6 +12,13 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
+/**
+ * 用户权限
+ * 
+ * @author zhangdq
+ * @time 2018年3月23日 下午2:53:00
+ * @Email qiang900714@126.com
+ */
 public class UserRealm extends AuthorizingRealm {
 	private String realmName = "userRealm";
 
